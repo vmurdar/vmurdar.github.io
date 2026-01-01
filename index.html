@@ -4,25 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayyo Laletta!</title>
-
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .nav-section {
+            margin-top: 30px;
+        }
+        
+        .nav-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background: #e8e9ea;
+            border-color: #007bff;
+            color: #007bff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link:active {
+            transform: translateY(0);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
-
-<body style="margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f0f0f0;">
-    <div style="width: 100%; max-width: 800px; padding: 0 15px;">
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-
+<body>
+    <div class="container">
+        <h1>Ayyo Laletta!</h1>
+        
+        <div class="video-wrapper">
             <iframe
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
                 src="https://www.youtube.com/embed/BkCTW6xgEh0?start=893&end=946" 
-                title="Mohanlal &amp; Prithviraj On L2: Empuraan" 
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                title="Mohanlal &amp; Prithviraj On L2: Empuraan"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
             </iframe>
         </div>
-        <p>Some additional links here</p>
-        <p>&nbsp;</p> <!-- blank paragraph for spacing, or use CSS margin instead -->
-
-        <a href="static/hiit.html">HIIT for oldies</a>
-
+        
+        <nav class="nav-section">
+            <h2>Explore More</h2>
+            <div class="nav-links">
+                <a href="static/hiit.html" class="nav-link">HIIT for Oldies</a>
+                <a href="static/youtube-collection.html" class="nav-link">YouTube Collection</a>
+                <a href="static/reddit-posts.html" class="nav-link">Reddit Highlights</a>
+                <a href="static/blog.html" class="nav-link">My Blog</a>
+                <a href="static/resources.html" class="nav-link">Resources</a>
+                <a href="static/about.html" class="nav-link">About</a>
+            </div>
+        </nav>
+    </div>
 </body>
 </html>
