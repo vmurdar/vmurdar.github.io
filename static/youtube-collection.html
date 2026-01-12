@@ -8,83 +8,55 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header class="header">
             <a href="../index.html" class="back-link">← Back to Home</a>
             
-            <div class="breadcrumb">
+            <nav class="breadcrumb">
                 <a href="../index.html">Home</a> / YouTube Collection
-            </div>
+            </nav>
             
             <h1>YouTube Collection</h1>
-        </div>
-        
-        <div class="video-grid">
-            <!-- Video 1: A Day at the Zoo -->
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe
-                        src="https://www.youtube.com/embed/YjobUn18TEo" 
-                        title="A Day at the Zoo"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <div class="video-title">A Day at the Zoo</div>
-                    <a href="https://youtu.be/YjobUn18TEo" class="video-link" target="_blank" rel="noopener noreferrer">
-                        Watch on YouTube →
-                    </a>
-                </div>
-            </div>
-            <!-- Add more videos here following the same pattern -->
+        </header>
 
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe
-                        src="https://www.youtube.com/embed/gU6K6Na_L2Q" 
-                        title="Fool for Love"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
+        <section class="video-section">
+            <h2 class="section-title">Videos</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/YjobUn18TEo" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">A Day at the Zoo</div>
+                        <a href="https://youtu.be/YjobUn18TEo" class="video-link" target="_blank">Watch on YouTube →</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Video 2: Okonomiyaki (Short) -->
-            <div class="video-card shorts-card">
-                <div class="video-wrapper shorts">
-                    <iframe
-                        src="https://www.youtube.com/embed/rTsMyrHxiig" 
-                        title="Okonomiyaki"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <div class="video-title">Okonomiyaki</div>
-                    <a href="https://youtube.com/shorts/rTsMyrHxiig" class="video-link" target="_blank" rel="noopener noreferrer">
-                        Watch on YouTube →
-                    </a>
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/gU6K6Na_L2Q" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Fool for Love</div>
+                        <a href="https://www.youtube.com/watch?v=gU6K6Na_L2Q" class="video-link" target="_blank">Watch on YouTube →</a>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Add more videos here following the same pattern -->
-            <!-- 
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe
-                        src="https://www.youtube.com/embed/gU6K6Na_L2Q" 
-                        title="Fool for Love"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                    </iframe>
+        </section>
+
+        <section class="video-section">
+            <h2 class="section-title">Shorts</h2>
+            <div class="shorts-grid">
+                <div class="video-card">
+                    <div class="video-wrapper shorts">
+                        <iframe src="https://www.youtube.com/embed/rTsMyrHxiig" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Okonomiyaki</div>
+                        <a href="https://youtube.com/shorts/rTsMyrHxiig" class="video-link" target="_blank">Watch on YouTube →</a>
+                    </div>
                 </div>
             </div>
-            -->
-        </div>
+        </section>
     </div>
 </body>
 </html>
