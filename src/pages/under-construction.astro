@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavLink from '../components/NavLink.astro';
+import { navItems } from '../data/nav';
+---
+<BaseLayout title="Under Construction" navItems={navItems}>
+  <header class="w-full flex flex-col items-start gap-4 mb-10 text-left">
+    <NavLink href="/" label="← Back to Home" isBackLink />
+    <nav class="text-sm text-[#666] dark:text-[#b0b0b0]">
+      <a href="/" class="text-[#007bff] dark:text-[#4dabff] no-underline">Home</a> / Comming Attractions
+    </nav>
+  </header>
+
+  <div class="py-20 flex flex-col items-center">
+    <span class="text-6xl mb-6">🚧</span>
+    <h1 class="text-4xl font-bold mb-4">Under Construction</h1>
+    <p class="text-[#666] dark:text-[#b0b0b0] mb-10">Still working on this part of the site. Check back soon!</p>
+  </div>
+</BaseLayout>

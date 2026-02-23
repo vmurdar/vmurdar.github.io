@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavLink from '../components/NavLink.astro';
+import { navItems } from '../data/nav';
+---
+<BaseLayout title="HIIT Home Workout for Older Adults" navItems={navItems}>
+  <header class="w-full flex flex-col items-start gap-4 mb-10 text-left">
+    <NavLink href="/" label="← Back to Home" isBackLink />
+    <nav class="text-sm text-[#666] dark:text-[#b0b0b0]">
+      <a href="/" class="text-[#007bff] dark:text-[#4dabff] no-underline">Home</a> / HIIT for Older Adults
+    </nav>
+    <h1 class="text-3xl font-bold">An Easy HIIT Home Workout for Older Adults</h1>
+  </header>
+
+  <main class="w-full text-left space-y-12">
+    <section class="bg-zinc-900 p-6 rounded-lg border border-zinc-800">
+      <p class="leading-relaxed">HIIT alternates intervals of high-intensity exercise with recovery periods...</p>
+      <p> To create a HIIT workout from the exercises below, do each exercise for 30 to 60 seconds. 
+          Then march in place for 30 to 60 seconds to recover before moving on to the next exercise. You can always march in place for longer if you're not ready to push yourself again. 
+          Repeat this pattern, gradually working up to a 30-minute workout. As you're getting started, do only as much as you can do while maintaining good form.</p>
+
+      <p>HIIT workouts should never be painful or so draining that you can't finish the intervals.</p>
+
+      <p>A note on terminology: In the following exercises, "tempo" tells you the time to allot to each of the key movements in an exercise. 
+          For example, a 3-1-3 tempo means you should count to 3 as you do the first part of the exercise, hold the new position for a count of 1, and return to the starting position as you count to 3. 
+          Faster-paced cardio moves often have a tempo that looks like 1-1-1-1-1, meaning one count for each portion of the exercise.</p>
+    </section>
+    
+    <section class="border-t border-[#e0e0e0] dark:border-[#444] pt-8">
+      <h2 class="text-xl font-bold mb-6">Moving Squat with Arm Sweep</h2>
+      <div class="mb-6 max-w-2xl border border-[#e0e0e0] dark:border-[#444] rounded-lg overflow-hidden">
+        <img src="/images/moving_squat_with_arm_sweep.png" alt="Moving squat" class="w-full h-auto" />
+      </div>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Stand with feet together and arms at sides.</li>
+        <li>Step out to the right, lowering into a squat as you sweep arms overhead.</li>
+        <li>Keep your knees no farther forward than your toes as you squat. Don't let your shoulders come up toward your ears as you raise your arms.</li>
+        <li>Straighten your legs, bringing your left foot next to your right and your arms down to your sides as you return to the starting position, but to the right of where you started.</li>
+        <li>Repeat, stepping to the right two or three more times, depending upon the amount of space you have. Reverse, stepping to the left.</li>
+        <li>Repeat this sequence for 30 to 60 seconds.</li>
+      </ul>
+      <p><em>To make this exercise easier:</em> Take smaller steps to the side. Don't squat so low. Keep your hands on your hips.</p>
+      <p><em>To make this exercise harder:</em> Squat lower, but not below knee height. Move faster while maintaining good form.</p>
+    </section>
+
+    <section class="border-t border-[#e0e0e0] dark:border-[#444] pt-8">
+      <h2 class="text-xl font-bold mb-6">Side kick</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <img src="/images/side_kick.png" alt="Person demonstrating side kick exercise" class="rounded-lg border border-[#e0e0e0] dark:border-[#444]" />
+      </div>
+      <ul class="list-disc pl-6 space-y-2">
+          <li>Stand up straight with your feet about hip-width apart. Keep your upper body relaxed.</li>
+          <li>Bend your arms so your hands are in front of your chest like a boxer. Make loose fists with your hands.</li>
+          <li>Step forward with your left foot, placing it in front of your right foot.</li>
+          <li>Lean your upper body to the left, raise your right knee out to the side, and then extend your leg, kicking to the side with your foot flexed. Tighten your abdominal muscles and power the move from your gluteal (buttock) muscles. Your knees and toes should be pointing forward as you kick.</li>
+          <li>Bend your right knee, lower your leg, and step back to the starting position.</li>
+          <li>Repeat for half of the 30 to 60 second interval period, and then switch sides, kicking with your left leg for the rest of the interval. The tempo of this interval is 1-1-1-1.</li>
+      </ul>
+      <p><em>To make this exercise easier:</em> Kick lower. You can hold on to the back of a chair for balance if needed.</p>
+      <p><em>To make this exercise harder:</em> Kick higher. Add a punch with the same-side arm.</p>                  
+    </section>
+
+    <section class="border-t border-[#e0e0e0] dark:border-[#444] pt-8">
+      <h2 class="text-xl font-bold mb-6">Plank Stand</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <img src="/images/plank_stand1.png" alt="Plank start" class="rounded-lg border border-[#e0e0e0] dark:border-[#444]" />
+        <img src="/images/plank_stand2.png" alt="Plank position" class="rounded-lg border border-[#e0e0e0] dark:border-[#444]" />
+      </div>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Stand with your feet together and your arms at your sides. Tighten your abdominal muscles.</li>
+        <li>Hinge forward from your hips, bending your knees, and place your hands on the floor. Bend your knees as much as you need to in order to place your hands on the floor.</li>
+        <li>Walk your hands out until your body is in a plank position. Your body should be in line from your head to your heels and your hands directly beneath your shoulders in the plank position.</li>
+        <li>Then walk your hands back toward your feet and roll up to the starting position.</li>
+        <li>Repeat for the duration of the 30 to 60 second interval. The tempo for the interval is 1-4-1-4-1.</li>        
+      </ul>                    
+    </section>
+
+  </main>
+</BaseLayout>

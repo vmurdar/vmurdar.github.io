@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+const { title, navItems = [] } = Astro.props;
+import NavLink from '../components/NavLink.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+
+  <body class="bg-zinc-950 text-zinc-100">
+    <div class="min-h-screen flex">
+
+      <!-- Sidebar -->
+      <aside class="
+        hidden md:flex md:flex-col
+        w-64
+        fixed
+        inset-y-0 left-0
+        bg-zinc-900
+        border-r border-zinc-800
+        p-6
+      ">
+        <h2 class="text-lg font-semibold mb-6">Explore</h2>
+
+        <nav class="flex flex-col gap-1">
+          {navItems.map((item) => (
+            <NavLink
+              href={item.href}
+              label={item.label}
+              variant="sidebar"
+            />
+          ))}
+        </nav>
+      </aside>
+
+      <!-- Content Area -->
+      <main class="flex-1 md:ml-64 p-6 md:p-10">
+        <slot />
+      </main>
+
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 inset-x-0 bg-zinc-900 border-t border-zinc-800 p-3">
+      <div class="flex overflow-x-auto gap-3">
+        {navItems.map((item) => (
+          <NavLink
+            href={item.href}
+            label={item.label}
+            variant="sidebar"
+          />
+        ))}
+      </div>
+    </div>
+
+  </body>
+</html>

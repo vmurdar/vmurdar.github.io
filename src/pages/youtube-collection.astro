@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import NavLink from '../components/NavLink.astro';
+import { navItems } from '../data/nav';
+
+const videos = [
+  { title: "A Day at the Zoo", embed: "https://www.youtube.com/embed/YjobUn18TEo", url: "https://youtu.be/YjobUn18TEo" },
+  { title: "Ernakulathappan Temple", embed: "https://www.youtube.com/embed/lhtDyFAJS3Y", url: "https://youtu.be/lhtDyFAJS3Y" },
+  { title: "Fool for Love", embed: "https://www.youtube.com/embed/gU6K6Na_L2Q", url: "https://youtu.be/gU6K6Na_L2Q" },
+  { title: "Lal & Prithvi", embed: "https://www.youtube.com/embed/BkCTW6xgEh0?start=893&end=946", url: "https://www.youtube.com/watch?v=BkCTW6xgEh0&start=893&end=946" },
+];
+
+const shorts = [
+  { title: "Okonomiyaki", embed: "https://www.youtube.com/embed/rTsMyrHxiig", url: "https://youtube.com/shorts/rTsMyrHxiig" },
+];
+---
+<BaseLayout title="Videos" navItems={navItems}>
+  <header class="w-full flex flex-col items-start gap-4 mb-10 text-left">
+    <NavLink href="/" label="← Back to Home" isBackLink />
+    <nav class="text-sm text-[#666] dark:text-[#b0b0b0]">
+      <a href="/" class="text-[#007bff] dark:text-[#4dabff] no-underline">Home</a> / Video Collection
+    </nav>
+    <h1 class="text-3xl font-bold">Video Collection</h1>
+  </header>
+
+  <section class="mb-12">
+    <h2 class="text-2xl font-bold border-b-2 border-zinc-100 dark:border-zinc-800 pb-2 mb-6">Clips</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {videos.map(v => <VideoCard title={v.title} embedUrl={v.embed} youtubeUrl={v.url} />)}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold border-b-2 border-zinc-100 dark:border-zinc-800 pb-2 mb-6">Shorts</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {shorts.map(s => <VideoCard title={s.title} embedUrl={s.embed} youtubeUrl={s.url} isShort />)}
+    </div>
+  </section>
+</BaseLayout>

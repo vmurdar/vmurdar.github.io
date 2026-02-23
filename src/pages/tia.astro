@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NavLink from '../components/NavLink.astro';
+import { navItems } from '../data/nav';
+---
+<BaseLayout title="Recognize and Respond to Signs of a Stroke" navItems={navItems}>
+  <header class="w-full flex flex-col items-start gap-4 mb-10 text-left">
+    <NavLink href="/" label="← Back to Home" isBackLink />
+    <nav class="text-sm text-[#666] dark:text-[#b0b0b0]">
+      <a href="/" class="text-[#007bff] dark:text-[#4dabff] no-underline">Home</a> / Resources
+    </nav>
+    <h1 class="text-3xl font-bold">Recognize and Respond to Signs of a Stroke</h1>
+  </header>
+
+  <main class="w-full text-left">
+    <section class="bg-zinc-900 p-6 rounded-lg border border-zinc-800">
+     <p>Many people who suffer a first-time stroke had a prior warning from a transient ischemic attack (TIA), 
+        also known as a ministroke. TIAs can last anywhere from 30 seconds to 20 minutes, although most usually last at least five minutes.</p>
+    </section>
+    <p class="mt-4 mb-8 text-zinc-300 font-medium">
+      Use BE-FAST to recognize symptoms.
+    </p>
+    <section class="border-t border-[#e0e0e0] dark:border-[#444] pt-8">
+      <h2 class="text-xl font-bold mb-6">How to recognize and respond to a "warning" stroke</h2>
+        <p mt-4 class="text-zinc-300 leading-relaxed">
+          TIAs can recur with the same symptoms or different ones. The acronym BE-FAST can help people recognize signs and symptoms. 
+          Most people experience one or more of these during a TIA
+        </p>
+    </section>
+    <div class="max-w-2xl mb-8">
+      <img src="/images/stroke_warning_signs.jpg" alt="BE FAST acronym" class="w-full rounded-lg border border-[#e0e0e0]" />
+    </div>
+
+    <ul class="space-y-4">
+      <li><strong>B: Balance.</strong>Balance problems caused by a TIA often make it difficult to stand up, or you may fall to one side.</li>
+      <li><strong>E: Eyes.</strong> The most common vision problem is being unable to see from one or both eyes. Often, people see a dark gray shade that blocks half or all of their vision. Blurred or double vision can also occur./li>
+      <li><strong>F: Face.</strong> The face may droop on one or both sides.</li>
+      <li><strong>A: Arm weakness.</strong> Usually occurs on only one side.</li>
+      <li><strong>S: Speech difficulty.</strong> Slurred or garbled speech is common.</li>
+      <li><strong>T: Time.</strong> Call 911 immediately.</li>
+    </ul>
+    <p><em>
+      Early recognition of the likely cause of a TIA is the best way to prevent a stroke. 
+        Because most TIAs are related to a temporary clot forming in a narrowed brain artery, 
+        the usual treatment begins with two antiplatelet drugs, 
+        such as aspirin and clopidogrel (Plavix), or an anticoagulant medication to prevent additional blood clots 
+        from forming.
+    </em></p>    
+  </main>
+</BaseLayout>

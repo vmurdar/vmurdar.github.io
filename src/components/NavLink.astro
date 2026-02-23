@@ -1,0 +1,45 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: "sidebar" | "grid";
+  isBackLink?: boolean;
+}
+
+const {
+  href,
+  label,
+  variant = "sidebar",
+  isBackLink = false
+} = Astro.props;
+
+const isActive = Astro.url.pathname === href;
+---
+
+<a
+  href={href}
+  class:list={[
+    "transition-all duration-200 no-underline font-medium rounded-md",
+
+    // Sidebar variant (default)
+    variant === "sidebar" && [
+      "block w-full px-4 py-2 text-left",
+      "text-zinc-400 hover:text-white",
+      "hover:bg-zinc-800",
+      isActive && "bg-zinc-800 text-white"
+    ],
+
+    // Grid / button variant (your original style, cleaned)
+    variant === "grid" && [
+      "inline-flex items-center justify-center min-h-12 min-w-40 px-6 py-3 border-2 text-center",
+      "bg-[#f8f9fa] dark:bg-[#252525] border-[#e0e0e0] dark:border-[#444]",
+      "text-[#333] dark:text-[#e0e0e0]",
+      "hover:border-[#007bff] hover:text-[#007bff] dark:hover:text-[#4dabff]",
+      "hover:bg-white dark:hover:bg-[#1e1e1e]"
+    ],
+
+    isBackLink && "self-start mb-4"
+  ]}
+>
+  {label}
+</a>
