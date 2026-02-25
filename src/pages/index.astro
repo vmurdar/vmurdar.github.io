@@ -1,20 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { navItems } from '../data/nav';
+import Layout from '../layouts/Layout.astro';
+import { Carousel } from '../components/Carousel';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Get images from public/carousel
+const carouselDir = path.join(process.cwd(), 'public', 'carousel');
+let carouselImages: string[] = [];
+
+try {
+  if (fs.existsSync(carouselDir)) {
+    carouselImages = fs.readdirSync(carouselDir)
+      .filter(file => /\.(jpg|jpeg|png|webp|gif)$/i.test(file))
+      .map(file => `/carousel/${file}`);
+  }
+} catch (e) {
+  console.error("Error reading carousel images:", e);
+}
 ---
 
-<BaseLayout title="World According to Me" navItems={navItems}>
+<Layout title="The World according to Me">
+	<header class="mb-8 text-center">
+		<h1 class="text-3xl font-bold mb-4">Maps and stuff</h1>
+	</header>
 
-  <header class="mb-12">
-    <h1 class="text-3xl font-bold mb-6">Da Woild</h1>
-
-    <div class="max-w-2xl border border-zinc-800 rounded-lg overflow-hidden">
-      <img
-        src="/images/WorldMap_UD.jpg"
-        alt="True Size of Countries"
-        class="w-full h-auto"
-      />
-    </div>
-  </header>
-
-</BaseLayout>
+	<div class="mb-12">
+		<Carousel client:load images={carouselImages} />
+	</div>
+</Layout>

@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import { navItems } from '../config/nav';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Ayyo Laletta!" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-zinc-900 text-gray-200">
+		<div class="flex min-h-screen">
+			<!-- Fixed Sidebar -->
+			<aside class="w-64 fixed inset-y-0 left-0 sidebar overflow-y-auto hidden md:block z-50">
+				<div class="p-6">
+					<h2 class="text-xl font-bold mb-6">Ayyo Laletta!</h2>
+					<nav class="space-y-2">
+						{navItems.map((item) => (
+							<a 
+								href={item.href} 
+								class="nav-link"
+							>
+								{item.label}
+							</a>
+						))}
+					</nav>
+				</div>
+			</aside>
+
+			<!-- Mobile Header (visible only on small screens) -->
+			<div class="md:hidden fixed top-0 left-0 right-0 mobile-header p-4 z-50 flex justify-between items-center">
+				<span class="font-bold text-white">Ayyo Laletta!</span>
+				<details class="relative">
+					<summary class="list-none cursor-pointer p-2 text-gray-300 hover:text-white">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+						</svg>
+					</summary>
+					<div class="absolute right-0 top-full mt-2 w-48 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl py-2">
+						{navItems.map((item) => (
+							<a 
+								href={item.href} 
+								class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white"
+							>
+								{item.label}
+							</a>
+						))}
+					</div>
+				</details>
+			</div>
+
+			<!-- Main Content -->
+			<main class="flex-1 md:ml-64 p-4 md:p-8 pt-20 md:pt-8 w-full max-w-4xl mx-auto">
+				<slot />
+			</main>
+		</div>
+	</body>
+</html>

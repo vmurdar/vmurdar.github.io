@@ -1,1 +1,141 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Colors */
+  --color-bg-body: #18181b; /* zinc-900 */
+  --color-bg-sidebar: #27272a; /* zinc-800 */
+  --color-bg-card: #27272a; /* zinc-800 */
+  --color-bg-card-hover: #3f3f46; /* zinc-700 */
+  
+  --color-border-ui: #3f3f46; /* zinc-700 */
+  
+  --color-text-primary: #e4e4e7; /* zinc-200 */
+  --color-text-secondary: #a1a1aa; /* zinc-400 */
+  --color-text-heading: #ffffff; /* white */
+  
+  --color-accent: #60a5fa; /* blue-400 */
+  --color-accent-hover: #93c5fd; /* blue-300 */
+
+  /* Spacing & Layout */
+  --radius: 0.5rem;
+  --sidebar-width: 16rem; /* 64 * 0.25rem = 16rem */
+}
+
+/* Base Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg-body);
+  color: var(--color-text-primary);
+  @apply antialiased;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-heading);
+}
+
+/* Layout Components */
+.container {
+  @apply max-w-4xl mx-auto px-4 py-8;
+}
+
+.sidebar {
+  background-color: var(--color-bg-sidebar);
+  border-right: 1px solid var(--color-border-ui);
+}
+
+.mobile-header {
+  background-color: var(--color-bg-sidebar);
+  border-bottom: 1px solid var(--color-border-ui);
+}
+
+/* Navigation */
+.nav-link {
+  @apply block px-4 py-2 rounded-lg transition-colors;
+  color: var(--color-text-secondary);
+}
+
+.nav-link:hover {
+  background-color: var(--color-bg-card-hover);
+  color: var(--color-text-heading);
+}
+
+.back-link {
+  @apply inline-block mt-8 transition-colors;
+  color: var(--color-accent);
+}
+
+.back-link:hover {
+  color: var(--color-accent-hover);
+}
+
+.breadcrumb {
+  @apply text-sm mb-4;
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb a {
+  color: var(--color-accent);
+}
+
+.breadcrumb a:hover {
+  @apply underline;
+}
+
+/* Cards & Content Containers */
+.card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-ui);
+  @apply rounded-xl shadow-sm overflow-hidden transition-shadow;
+}
+
+.card:hover {
+  @apply shadow-md;
+}
+
+.info-box {
+  background-color: #52525b; /* zinc-600 (even lighter) */
+  border: 1px solid var(--color-border-ui);
+  color: #f4f4f5; /* zinc-100 (very light text) */
+  @apply p-6 rounded-xl mb-4;
+}
+
+/* Video Components */
+.video-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-12;
+}
+
+.shorts-grid {
+  @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+}
+
+.video-wrapper {
+  @apply relative w-full aspect-video bg-black;
+}
+
+.video-wrapper.shorts {
+  @apply aspect-[9/16];
+}
+
+.video-wrapper iframe {
+  @apply absolute top-0 left-0 w-full h-full border-0;
+}
+
+.video-info {
+  @apply p-4;
+}
+
+.video-title {
+  @apply font-semibold mb-2 line-clamp-2;
+  color: var(--color-text-heading);
+}
+
+.video-link {
+  @apply text-sm font-medium;
+  color: var(--color-accent);
+}
+
+.video-link:hover {
+  color: var(--color-accent-hover);
+}
