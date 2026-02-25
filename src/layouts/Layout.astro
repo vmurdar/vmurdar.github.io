@@ -7,7 +7,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Knowledge is gigawatts" } = Astro.props;
+const { title, description = "Knowledge in gigawatts" } = Astro.props;
 ---
 
 <!doctype html>
@@ -25,7 +25,7 @@ const { title, description = "Knowledge is gigawatts" } = Astro.props;
 			<!-- Fixed Sidebar -->
 			<aside class="w-64 fixed inset-y-0 left-0 sidebar overflow-y-auto hidden md:block z-50">
 				<div class="p-6">
-					<h2 class="text-xl font-bold mb-6">Ayyo Laletta!</h2>
+					<h2 class="text-xl font-bold mb-6">Knowledge</h2>
 					<nav class="space-y-2">
 						{navItems.map((item) => (
 							<a 
@@ -41,7 +41,7 @@ const { title, description = "Knowledge is gigawatts" } = Astro.props;
 
 			<!-- Mobile Header (visible only on small screens) -->
 			<div class="md:hidden fixed top-0 left-0 right-0 mobile-header p-4 z-50 flex justify-between items-center">
-				<span class="font-bold text-white">Ayyo Laletta!</span>
+				<span class="font-bold text-white">Knowledge</span>
 				<details class="relative">
 					<summary class="list-none cursor-pointer p-2 text-gray-300 hover:text-white">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
