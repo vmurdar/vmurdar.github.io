@@ -2,6 +2,8 @@
 title: Recognize and Respond to Signs of a Stroke
 description: Recognize and respond to signs of a stroke with this HIIT workout designed for older adults.
 ---
+import { Image } from 'astro:assets';
+import beFast from './stroke_warning_signs.jpg';
 
 <div class="prose prose-lg prose-invert max-w-none prose-img:rounded-xl prose-headings:border-b prose-headings:pb-2 prose-headings:border-zinc-700">
 
@@ -13,7 +15,7 @@ description: Recognize and respond to signs of a stroke with this HIIT workout d
 
 TIAs can recur with the same symptoms or different ones. The acronym BE-FAST can help people recognize signs and symptoms. Most people experience one or more of these during a TIA.
 
-<img src="/images/stroke_warning_signs.jpg" alt="recognize the signs of a stroke, using the acronym BE FAST as described in the article" width="600" height="400" loading="lazy" />
+<Image src={beFast} alt="recognize the signs of a stroke, using the acronym BE FAST as described in the article" width="600" height="400" loading="lazy" />
 
 *   **B: Balance** Balance problems caused by a TIA often make it difficult to stand up, or you may fall to one side.
 *   **E: Eyes** The most common vision problem is being unable to see from one or both eyes. Often, people see a dark gray shade that blocks half or all of their vision. Blurred or double vision can also occur.

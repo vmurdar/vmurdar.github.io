@@ -3,6 +3,12 @@ title: HIIT Home Workout for Older Adults
 description: HIIT home workout guide for older adults with step-by-step exercise instructions
 ---
 
+import { Image } from 'astro:assets';
+import movingSquat from './moving_squat_with_arm_sweep.png';
+import sideKick from './side_kick.png';
+import plankStand1 from './plank_stand1.png';
+import plankStand2 from './plank_stand2.png';
+
 <div class="prose prose-lg prose-invert max-w-none prose-img:rounded-xl prose-headings:border-b prose-headings:pb-2 prose-headings:border-zinc-700">
 
 <div class="info-box not-prose">
@@ -22,7 +28,7 @@ As with any exercise, begin with a dynamic warmup. This can be as simple as a 10
 
 ## Moving Squat with Arm Sweep
 
-<img src="/images/moving_squat_with_arm_sweep.png" alt="Person demonstrating moving squat with arm sweep exercise" width="600" height="400" loading="lazy" />
+<Image src={movingSquat} alt="Person demonstrating moving squat with arm sweep exercise" width="600" height="400" loading="lazy" />
 
 Stand with your feet together and your arms at your sides. Keep your shoulders back and down at all times. Tighten your abdominal muscles.
 
@@ -39,7 +45,7 @@ Stand with your feet together and your arms at your sides. Keep your shoulders b
 
 ## Side Kick
 
-<img src="/images/side_kick.png" alt="Person demonstrating side kick exercise" width="600" height="400" loading="lazy" />
+<Image src={sideKick} alt="Person demonstrating side kick exercise" width="600" height="400" loading="lazy" />
 
 *   Stand up straight with your feet about hip-width apart. Keep your upper body relaxed.
 *   Bend your arms so your hands are in front of your chest like a boxer. Make loose fists with your hands.
@@ -55,8 +61,8 @@ Stand with your feet together and your arms at your sides. Keep your shoulders b
 ## Plank Stand
 
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
-    <img src="/images/plank_stand1.png" alt="Person demonstrating plank stand exercise - starting position" width="600" height="400" loading="lazy" />
-    <img src="/images/plank_stand2.png" alt="Person demonstrating plank stand exercise - plank position" width="600" height="400" loading="lazy" />
+    <Image src={plankStand1} alt="Person demonstrating plank stand exercise - starting position" width="600" height="400" loading="lazy" />
+    <Image src={plankStand2} alt="Person demonstrating plank stand exercise - plank position" width="600" height="400" loading="lazy" />
 </div>
 
 *   Stand with your feet together and your arms at your sides. Tighten your abdominal muscles.
