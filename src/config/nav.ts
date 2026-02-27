@@ -1,8 +1,31 @@
+export interface NavItem {
+	label: string;
+	href?: string;
+	children?: NavItem[];
+}
+
 export const navItems = [
-	{ href: '/hiit', label: 'HIIT for Oldies' },
-	{ href: '/videos', label: 'Videos Collection' },
-	{ href: '/under-construction', label: 'Reddit Highlights' },
-	{ href: '/under-construction', label: 'My Blog' },
-	{ href: '/tia', label: 'Resources' },
-	{ href: '/under-construction', label: 'About' },
+  {
+    label: "Health",
+    children: [
+      { label: "HIIT for Oldies", href: "/health/hiit" },
+      { label: "Are you having a Stroke?", href: "/health/tia" },
+    ],
+  },
+  {
+    label: "Imagery",
+    children: [
+    { label: "Gallery", href: "/under-construction" },
+    ]
+  },
+  {
+    label: "meTube",
+    children: [
+		{ label: "Clips", href: "/meTube/clips" },
+    ],
+  },
+  {
+    label: "Tech",
+    href: "/under-construction",
+  },
 ];

@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navigation */
 .nav-link {
-  @apply block px-4 py-2 rounded-lg transition-colors;
+  @apply px-4 py-2 rounded-lg transition-colors;
   color: var(--color-text-secondary);
 }
 
@@ -101,6 +101,11 @@ h1, h2, h3, h4, h5, h6 {
   @apply p-6 rounded-xl mb-4;
 }
 
+/* Fix for large gap below info-box caused by prose h2 margin */
+.prose .info-box + h2 {
+  margin-top: 1.5rem !important;
+}
+
 /* Video Components */
 .video-grid {
   @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-12;
@@ -115,7 +120,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .video-wrapper.shorts {
-  @apply aspect-[9/16];
+  @apply aspect-9/16;
 }
 
 .video-wrapper iframe {

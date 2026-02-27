@@ -7,7 +7,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Knowledge in gigawatts" } = Astro.props;
+const { title, description = "Knowledge by the GW" } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,50 +21,88 @@ const { title, description = "Knowledge in gigawatts" } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="bg-zinc-900 text-gray-200">
-		<div class="flex min-h-screen">
-			<!-- Fixed Sidebar -->
-			<aside class="w-64 fixed inset-y-0 left-0 sidebar overflow-y-auto hidden md:block z-50">
-				<div class="p-6">
-					<h2 class="text-xl font-bold mb-6">Knowledge</h2>
-					<nav class="space-y-2">
-						{navItems.map((item) => (
-							<a 
-								href={item.href} 
-								class="nav-link"
-							>
-								{item.label}
-							</a>
-						))}
-					</nav>
+		<!-- Top Navigation -->
+		<header class="fixed top-0 left-0 right-0 bg-zinc-800 border-b border-zinc-700 z-50">
+			<div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+				<a href="/" class="text-xl font-bold text-white">Knowledge!</a>
+				
+				<!-- Desktop Nav -->
+				<nav class="hidden md:flex items-center space-x-1">
+					{navItems.map((item) => (
+						<div class="relative group">
+							{item.children ? (
+								<button class="nav-link flex items-center gap-1 cursor-pointer whitespace-nowrap">
+									<span>{item.label}</span>
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 shrink-0">
+										<path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+									</svg>
+								</button>
+								<div class="absolute left-0 top-full pt-2 hidden group-hover:block min-w-40">
+									<div class="bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl py-2 overflow-hidden">
+										{item.children.map((child) => (
+											<a 
+												href={child.href || '/under-construction'} 
+												class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white transition-colors"
+											>
+												{child.label}
+											</a>
+										))}
+									</div>
+								</div>
+							) : (
+								<a 
+									href={item.href || '/under-construction'} 
+									class="nav-link block"
+								>
+									{item.label}
+								</a>
+							)}
+						</div>
+					))}
+				</nav>
+
+				<!-- Mobile Menu Toggle -->
+				<div class="md:hidden">
+					<details class="relative">
+						<summary class="list-none cursor-pointer p-2 text-gray-300 hover:text-white">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+							</svg>
+						</summary>
+						<div class="absolute right-0 top-full mt-2 w-64 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl py-2 z-50">
+							{navItems.map((item) => (
+								<div class="px-2">
+									{item.children ? (
+										<div class="py-2">
+											<span class="block px-4 py-1 text-xs font-semibold text-zinc-500 uppercase tracking-wider">{item.label}</span>
+											{item.children.map((child) => (
+												<a 
+													href={child.href || '/under-construction'} 
+													class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white rounded-md transition-colors"
+												>
+													{child.label}
+												</a>
+											))}
+										</div>
+									) : (
+										<a 
+											href={item.href || '/under-construction'} 
+											class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white rounded-md transition-colors"
+										>
+											{item.label}
+										</a>
+									)}
+								</div>
+							))}
+						</div>
+					</details>
 				</div>
-			</aside>
-
-			<!-- Mobile Header (visible only on small screens) -->
-			<div class="md:hidden fixed top-0 left-0 right-0 mobile-header p-4 z-50 flex justify-between items-center">
-				<span class="font-bold text-white">Knowledge</span>
-				<details class="relative">
-					<summary class="list-none cursor-pointer p-2 text-gray-300 hover:text-white">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-						</svg>
-					</summary>
-					<div class="absolute right-0 top-full mt-2 w-48 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl py-2">
-						{navItems.map((item) => (
-							<a 
-								href={item.href} 
-								class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white"
-							>
-								{item.label}
-							</a>
-						))}
-					</div>
-				</details>
 			</div>
+		</header>
 
-			<!-- Main Content -->
-			<main class="flex-1 md:ml-64 p-4 md:p-8 pt-20 md:pt-8 w-full max-w-4xl mx-auto">
-				<slot />
-			</main>
-		</div>
+		<!-- Main Content -->
+		<main class="flex-1 p-4 md:p-8 pt-24 md:pt-28 w-full max-w-4xl mx-auto min-h-screen">
+			<slot />
+		</main>
 	</body>
 </html>

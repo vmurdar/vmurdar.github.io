@@ -1,0 +1,10 @@
+{
+  "css.customData": [],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "tailwindCSS.includeLanguages": {
+    "astro": "html",
+    "mdx": "html"
+  }
+}
