@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const homeUrl = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Under Construction">
@@ -11,7 +12,7 @@ import Layout from '../layouts/Layout.astro';
 				Still working on this part of the site. Check back soon!
 			</p>
 			
-			<a href="/" class="back-link">
+			<a href={homeUrl} class="back-link">
 				&larr; Return to Home
 			</a>
 		</div>

@@ -6,6 +6,7 @@ const baseSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   draft: z.boolean().optional().default(false),
+  pubDate: z.coerce.date().optional(), 
 });
 
 // Modern Astro 5 Loaders

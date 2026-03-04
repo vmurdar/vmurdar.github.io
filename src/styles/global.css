@@ -2,145 +2,82 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Colors */
-  --color-bg-body: #18181b; /* zinc-900 */
-  --color-bg-sidebar: #27272a; /* zinc-800 */
-  --color-bg-card: #27272a; /* zinc-800 */
-  --color-bg-card-hover: #3f3f46; /* zinc-700 */
+  --color-ui-bg: var(--color-zinc-900);
+  --color-ui-card: var(--color-zinc-800);
+  --color-ui-border: var(--color-zinc-700);
+  --color-ui-accent: var(--color-blue-400);
+  --radius-xl: 0.75rem;
+}
+
+@layer base {
+  .prose-invert {
+    --tw-prose-links: var(--color-blue-400);
+    --tw-prose-headings: var(--color-white);
+  }
+  body {
+    @apply bg-zinc-900 text-zinc-200 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* --- Grid Layouts for clips.mdx --- */
+  .video-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-12;
+  }
+
+  .shorts-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4 mb-12;
+  }
+
+  /* --- Video Wrappers & Aspect Ratios --- */
+  .video-wrapper {
+    @apply relative w-full bg-black overflow-hidden;
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-wrapper.shorts {
+    aspect-ratio: 9 / 16;
+  }
+
+  /* Ensures iframes inside wrappers fill the space */
+  .video-wrapper iframe,
+  .video-wrapper > :first-child {
+    @apply absolute top-0 left-0 w-full h-full border-0;
+  }
+
+  /* --- Card & Typography --- */
+  .card {
+    @apply bg-zinc-800 border border-zinc-700 rounded-xl overflow-hidden transition-all hover:border-zinc-500 hover:shadow-xl;
+  }
+
+  .video-info {
+    @apply p-4;
+  }
+
+  .video-title {
+    @apply text-sm font-semibold text-white line-clamp-2;
+  }
+
+  .info-box {
+    @apply p-6 rounded-xl mb-8 border border-zinc-700 bg-zinc-800/50;
+  }
+
+  /* Navigation UI */
+  .nav-link {
+    @apply px-4 py-2 rounded-lg transition-colors text-zinc-400 hover:bg-zinc-700 hover:text-white;
+  }
+
+  .back-link {
+    @apply inline-flex items-center gap-2 mt-8 text-blue-400 hover:text-blue-300 font-medium;
+  }
+
+  .breadcrumb {
+    @apply flex items-center gap-2 text-sm text-zinc-500 mb-6;
+  }
   
-  --color-border-ui: #3f3f46; /* zinc-700 */
-  
-  --color-text-primary: #e4e4e7; /* zinc-200 */
-  --color-text-secondary: #a1a1aa; /* zinc-400 */
-  --color-text-heading: #ffffff; /* white */
-  
-  --color-accent: #60a5fa; /* blue-400 */
-  --color-accent-hover: #93c5fd; /* blue-300 */
-
-  /* Spacing & Layout */
-  --radius: 0.5rem;
-  --sidebar-width: 16rem; /* 64 * 0.25rem = 16rem */
+  .breadcrumb a {
+    @apply text-blue-400 hover:underline;
+  }
 }
 
-/* Base Styles */
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--color-bg-body);
-  color: var(--color-text-primary);
-  @apply antialiased;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-text-heading);
-}
-
-/* Layout Components */
-.container {
-  @apply max-w-4xl mx-auto px-4 py-8;
-}
-
-.sidebar {
-  background-color: var(--color-bg-sidebar);
-  border-right: 1px solid var(--color-border-ui);
-}
-
-.mobile-header {
-  background-color: var(--color-bg-sidebar);
-  border-bottom: 1px solid var(--color-border-ui);
-}
-
-/* Navigation */
-.nav-link {
-  @apply px-4 py-2 rounded-lg transition-colors;
-  color: var(--color-text-secondary);
-}
-
-.nav-link:hover {
-  background-color: var(--color-bg-card-hover);
-  color: var(--color-text-heading);
-}
-
-.back-link {
-  @apply inline-block mt-8 transition-colors;
-  color: var(--color-accent);
-}
-
-.back-link:hover {
-  color: var(--color-accent-hover);
-}
-
-.breadcrumb {
-  @apply text-sm mb-4;
-  color: var(--color-text-secondary);
-}
-
-.breadcrumb a {
-  color: var(--color-accent);
-}
-
-.breadcrumb a:hover {
-  @apply underline;
-}
-
-/* Cards & Content Containers */
-.card {
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border-ui);
-  @apply rounded-xl shadow-sm overflow-hidden transition-shadow;
-}
-
-.card:hover {
-  @apply shadow-md;
-}
-
-.info-box {
-  background-color: #52525b; /* zinc-600 (even lighter) */
-  border: 1px solid var(--color-border-ui);
-  color: #f4f4f5; /* zinc-100 (very light text) */
-  @apply p-6 rounded-xl mb-4;
-}
-
-/* Fix for large gap below info-box caused by prose h2 margin */
-.prose .info-box + h2 {
-  margin-top: 1.5rem !important;
-}
-
-/* Video Components */
-.video-grid {
-  @apply grid grid-cols-1 md:grid-cols-2 gap-6 mb-12;
-}
-
-.shorts-grid {
-  @apply grid grid-cols-2 md:grid-cols-4 gap-4;
-}
-
-.video-wrapper {
-  @apply relative w-full aspect-video bg-black;
-}
-
-.video-wrapper.shorts {
-  @apply aspect-9/16;
-}
-
-.video-wrapper iframe {
-  @apply absolute top-0 left-0 w-full h-full border-0;
-}
-
-.video-info {
-  @apply p-4;
-}
-
-.video-title {
-  @apply font-semibold mb-2 line-clamp-2;
-  color: var(--color-text-heading);
-}
-
-.video-link {
-  @apply text-sm font-medium;
-  color: var(--color-accent);
-}
-
-.video-link:hover {
-  color: var(--color-accent-hover);
-}

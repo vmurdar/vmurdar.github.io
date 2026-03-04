@@ -1,0 +1,35 @@
+---
+// src/components/LiteYouTube.astro
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+
+interface Props {
+  videoId: string;
+  title: string;
+  params?: string;
+  pillarbox?: boolean; // NEW: Toggle to mimic iframe letterboxing
+}
+
+const { videoId, title, params = "", pillarbox = false } = Astro.props;
+---
+<script>
+  import 'lite-youtube-embed';
+</script>
+
+<lite-youtube 
+  videoid={videoId} 
+  playlabel={`Play: ${title}`}
+  params={params}
+  posterquality="maxresdefault"
+  class:list={[
+    "absolute top-0 left-0 w-full h-full border-0",
+    pillarbox && "lyt-pillarbox"
+  ]}
+></lite-youtube>
+
+<style is:global>
+  /* When pillarbox is true, fit the whole thumbnail inside and fill the rest with black */
+  .lyt-pillarbox {
+    background-size: contain !important;
+    background-color: #000 !important;
+  }
+</style>

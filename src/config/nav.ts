@@ -1,31 +1,5 @@
-export interface NavItem {
-	label: string;
-	href?: string;
-	children?: NavItem[];
-}
+import { buildNavItems, type NavItem } from "./site-map";
 
-export const navItems = [
-  {
-    label: "Health",
-    children: [
-      { label: "HIIT for Oldies", href: "/health/hiit" },
-      { label: "Are you having a Stroke?", href: "/health/tia" },
-    ],
-  },
-  {
-    label: "Imagery",
-    children: [
-    { label: "Gallery", href: "/under-construction" },
-    ]
-  },
-  {
-    label: "meTube",
-    children: [
-		{ label: "Clips", href: "/meTube/clips" },
-    ],
-  },
-  {
-    label: "Tech",
-    href: "/under-construction",
-  },
-];
+export type { NavItem };
+
+export const navItems = buildNavItems();
