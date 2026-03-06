@@ -1,6 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Carousel } from '../components/Carousel';
+
+const imageModules = import.meta.glob<{ default: { src: string } }>(
+  "../assets/carousel/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true }
+);
+
+// REFACTORED: Create an object with both the source and a clean name
+const images = Object.entries(imageModules).map(([path, mod]) => {
+  const fileName = path.split('/').pop()?.split('.')[0] || "Carousel image";
+  // Replace hyphens/underscores with spaces for better screen reader flow
+  const altText = fileName.replace(/[-_]/g, ' ');
+  
+  return {
+    src: mod.default.src,
+    alt: altText
+  };
+});
 ---
 
 <Layout title="The World according to Me">
