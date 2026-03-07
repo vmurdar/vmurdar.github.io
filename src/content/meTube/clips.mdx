@@ -18,6 +18,16 @@ import LiteYouTube from '../../components/LiteYouTube.astro';
         </div>
         <div class="card">
             <div class="video-wrapper">
+                {/* Notice the new pillarbox={true} prop! */}
+                <LiteYouTube videoId="wF3AN839r2I" title="Gyeongbukgong Palace" pillarbox={true} />
+            </div>
+            <div class="video-info">
+                <div class="video-title">Changing of the Guard</div>
+            </div>
+        </div>
+        {/* Add more clips from <div class=card> to </div> */}
+        <div class="card">
+            <div class="video-wrapper">
                 <iframe 
                     src="https://www.youtube.com/embed/lhtDyFAJS3Y" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
