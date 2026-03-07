@@ -3,86 +3,83 @@ title: Videos
 description: A collection of clips 'n shorts.
 ---
 import LiteYouTube from '../../components/LiteYouTube.astro';
+export const clips = [
+  { id: "YjobUn18TEo", title: "A Day at the Zoo" },
+  { id: "wF3AN839r2I", title: "Changing of the Guard" },
+  { id: "lhtDyFAJS3Y", title: "Ernakulathappan Temple Shiveli (this might get loud)", pillarbox: true },
+];
+
+export const shorts = [
+  { id: "rTsMyrHxiig", title: "Okonomiyaki" },
+  { id: "N7fQTyc85sY", title: "Est Available ~04/05" },
+//  { type: "mp4", src: "/videos/ekm_temple_0129.mp4", title: "Temple Fest 2026 This might get loud" },
+];
+
+export const exts = [
+  { id: "BkCTW6xgEh0", title: "Lalettan's Take", params: "start=893&end=946" },
+  { id: "gU6K6Na_L2Q", title: "Fool for Love" },
+  { id: "lzFed7NO8BI", title: "Ghost Rider" },
+];
 
 <section class="mb-12 not-prose">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b border-zinc-700 text-white">Clips</h2>
     <div class="video-grid">
+        {clips.map(clip => (
         <div class="card">
             <div class="video-wrapper">
-                {/* Notice the new pillarbox={true} prop! */}
-                <LiteYouTube videoId="YjobUn18TEo" title="A Day at the Zoo" pillarbox={true} />
+            {clip.type === "mp4"
+                ? <video controls preload="metadata" class="absolute top-0 left-0 w-full h-full">
+                    <source src={clip.src} type="video/mp4" />
+                </video>
+                : <LiteYouTube videoId={clip.id} title={clip.title} pillarbox={clip.pillarbox ?? false} />
+            }
             </div>
             <div class="video-info">
-                <div class="video-title">A Day at the Zoo</div>
+                <div class="video-title">{clip.title}</div>
             </div>
         </div>
-        <div class="card">
-            <div class="video-wrapper">
-                {/* Notice the new pillarbox={true} prop! */}
-                <LiteYouTube videoId="wF3AN839r2I" title="Gyeongbukgong Palace" pillarbox={true} />
-            </div>
-            <div class="video-info">
-                <div class="video-title">Changing of the Guard</div>
-            </div>
-        </div>
-        {/* Add more clips from <div class=card> to </div> */}
-        <div class="card">
-            <div class="video-wrapper">
-                <iframe 
-                    src="https://www.youtube.com/embed/lhtDyFAJS3Y" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen 
-                    loading="lazy"
-                ></iframe>
-            </div>
-            <div class="video-info">
-                <div class="video-title">Ernakulathappan Temple Shiveli</div>
-            </div>
-        </div>
+        ))}
     </div>
 </section>
 
 <section class="mb-12 not-prose">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b border-zinc-700 text-white">Shorts</h2>
     <div class="shorts-grid">
+        {shorts.map(short => (
         <div class="card">
             <div class="video-wrapper shorts">
-                <LiteYouTube videoId="rTsMyrHxiig" title="Okonomiyaki" />
+                {short.type === "mp4"
+                ? <video 
+                    controls 
+                    preload="metadata" 
+                    class="absolute top-0 left-0 w-full h-full"
+                    style="object-fit: contain;"
+                    >
+                    <source src={short.src} type="video/mp4" />
+                    </video>
+                : <LiteYouTube videoId={short.id} title={short.title} />
+                }
             </div>
             <div class="video-info">
-                <div class="video-title">Okonomiyaki</div>
+            <div class="video-title">{short.title}</div>
             </div>
         </div>
-        <div class="card">
-            <div class="video-wrapper shorts">
-                <LiteYouTube videoId="N7fQTyc85sY" title="Ernakulam Temple Fest 2026" />
-            </div>
-            <div class="video-info">
-                <div class="video-title">Ernakulathappan Shiveli (currently unavailable)</div>
-            </div>
-        </div>
+        ))}
     </div>    
 </section>
 
 <section class="mb-12 not-prose">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b border-zinc-700 text-white">de WWW</h2>
     <div class="video-grid">
-        <div class="card">
-            <div class="video-wrapper">
-                <LiteYouTube videoId="gU6K6Na_L2Q" title="Fool for Love" />
+        {exts.map(ext => (
+            <div class="card">
+                <div class="video-wrapper">
+                    <LiteYouTube videoId={ext.id} title={ext.title} params={ext.params ?? false} />
+                </div>
+                <div class="video-info">
+                    <div class="video-title">{ext.title}</div>
+                </div>
             </div>
-            <div class="video-info">
-                <div class="video-title">Fool for Love</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="video-wrapper">
-                <LiteYouTube videoId="BkCTW6xgEh0" title="Lalettan's Take" params="start=893&end=946" />
-            </div>
-            <div class="video-info">
-                <div class="video-title">Lalettan's Take</div>
-            </div>
-        </div>
+        ))}    
     </div>
 </section>
