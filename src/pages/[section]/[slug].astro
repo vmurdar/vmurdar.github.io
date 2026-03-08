@@ -39,8 +39,8 @@ const { Content } = await render(entry);
 
 // Correctly handle the base path for GitHub Pages
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const currentPath = Astro.url.pathname;
-const signInPath = `${base}/sign-in?redirect_url=${encodeURIComponent(currentPath)}`;
+const returnTo = new URL(Astro.url.pathname, Astro.url.origin).toString();
+const signInPath = `${base}/sign-in?redirect_url=${encodeURIComponent(returnTo)}&after_sign_in_url=${encodeURIComponent(returnTo)}&after_sign_up_url=${encodeURIComponent(returnTo)}`;
 ---
 
 <Layout title={entry.data.title}>

@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SignUp as ClerkSignUp } from '@clerk/astro/components';
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Layout title="Sign up">
+  <div class="mx-auto max-w-md rounded-xl border border-zinc-700 bg-zinc-800 p-6">
+    <ClerkSignUp routing="path" path={`${base}/sign-up`} signInUrl={`${base}/sign-in`} />
+  </div>
+</Layout>
