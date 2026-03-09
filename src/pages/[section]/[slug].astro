@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getEntry, render } from "astro:content";
 import { SignedIn, SignedOut, UserButton } from '@clerk/astro/components';
+import { existsSync, statSync } from "node:fs";
 import { isProtectedContent } from "../../config/protected-content";
 import { sectionKeys, siteMap, type SectionKey, type SiteMapSection } from "../../config/site-map";
 
@@ -37,10 +38,18 @@ if (!entry || entry.data.draft) {
 const isProtected = isProtectedContent(section, slug);
 const { Content } = await render(entry);
 
-// Correctly handle the base path for GitHub Pages
-const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const returnTo = new URL(Astro.url.pathname, Astro.url.origin).toString();
-const signInPath = `${base}/sign-in?redirect_url=${encodeURIComponent(returnTo)}&after_sign_in_url=${encodeURIComponent(returnTo)}&after_sign_up_url=${encodeURIComponent(returnTo)}`;
+const contentFileCandidates = [
+  `src/content/${section}/${slug}.mdx`,
+  `src/content/${section}/${slug}.md`,
+];
+const contentFilePath = contentFileCandidates.find((candidate) => existsSync(candidate));
+const lastSavedDate = contentFilePath ? statSync(contentFilePath).mtime : null;
+const lastSavedText = lastSavedDate
+  ? new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(lastSavedDate)
+  : null;
+
+const currentPath = Astro.url.pathname;
+const signInPath = `/sign-in?redirect_url=${encodeURIComponent(currentPath)}&after_sign_in_url=${encodeURIComponent(currentPath)}&after_sign_up_url=${encodeURIComponent(currentPath)}&sign_in_force_redirect_url=${encodeURIComponent(currentPath)}&sign_up_force_redirect_url=${encodeURIComponent(currentPath)}`;
 ---
 
 <Layout title={entry.data.title}>
@@ -70,7 +79,7 @@ const signInPath = `${base}/sign-in?redirect_url=${encodeURIComponent(returnTo)}
             <h2 class="text-white mt-0">Protected Content</h2>
             <p class="text-zinc-400 mb-8">This section (meTube) requires an account to view.</p>
             <a 
-              href={signInPath} 
+              href={signInPath}
               class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105"
             >
               Sign In to View
@@ -84,6 +93,7 @@ const signInPath = `${base}/sign-in?redirect_url=${encodeURIComponent(returnTo)}
   </div>
 
   <div class="mt-12 pt-8 border-t border-zinc-700">
+    {lastSavedText && <p class="mb-4 text-right text-sm text-zinc-500">&copy; {lastSavedText}</p>}
     <a href={import.meta.env.BASE_URL} class="back-link">&larr; Back to Home</a>
   </div>
 </Layout>
