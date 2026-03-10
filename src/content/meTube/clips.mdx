@@ -3,37 +3,22 @@ title: Videos
 description: A collection of clips 'n shorts.
 ---
 import LiteYouTube from '../../components/LiteYouTube.astro';
+import { videos } from './clips-data.ts';
 
-{/* Add or delete clips to be displayed by editing data structures below: */}
-
-export const videos = [
-  { group: "my-clips", id: "YjobUn18TEo", title: "A Day at the Zoo" },
-  { group: "my-clips", id: "wF3AN839r2I", title: "Changing of the Guard" },
-  { group: "my-clips", id: "lhtDyFAJS3Y", title: "Ernakulathappan Temple Shiveli (this might get loud)", pillarbox: true },
-  { group: "my-clips", id: "gji4vi0JPPg", title: "Danjiri Matsuri in Himeji" },
-  { group: "my-clips", id: "7lod1wO14kE", title: "Hauendae Beach Aquarium" },
-  { group: "ext-clips", id: "BkCTW6xgEh0", title: "Lalettan's Take", params: "start=893&end=946" },
-  { group: "ext-clips", id: "gU6K6Na_L2Q", title: "Fool for Love" },
-  { group: "ext-clips", id: "lzFed7NO8BI", title: "Ghost Rider" },
-  { group: "shorts", id: "rTsMyrHxiig", title: "Okonomiyaki" },
-  { group: "shorts", id: "N7fQTyc85sY", title: "Est Avail ~ Apr05" },
-{/* { type: "mp4", src: "/videos/ekm_temple_0129.mp4", title: "Temple Fest 2026 This might get loud" }, */}
-];
+export const grouped = videos.reduce((acc, v) => {
+  (acc[v.group] ??= []).push(v);
+  return acc;
+}, {});
 
 {/* First display all my clips */}
 
 <section class="mb-12 not-prose">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b border-zinc-700 text-white">Clips</h2>
     <div class="video-grid">
-        {videos.filter(video => video.group === "my-clips").map(clip => (
+        {grouped["my-clips"].map(clip => (
         <div class="card">
             <div class="video-wrapper">
-            {clip.type === "mp4" ? 
-                <video controls preload="metadata" class="absolute top-0 left-0 w-full h-full">
-                    <source src={clip.src} type="video/mp4" />
-                </video>
-                : <LiteYouTube videoId={clip.id} title={clip.title} pillarbox={clip.pillarbox ?? false} />
-            }
+                <LiteYouTube videoId={clip.id} title={clip.title} pillarbox={clip.pillarbox ?? false} />
             </div>
             <div class="video-info">
                 <div class="video-title">{clip.title}</div>
@@ -48,7 +33,7 @@ export const videos = [
 <section class="mb-12 not-prose">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b border-zinc-700 text-white">Shorts</h2>
     <div class="shorts-grid">
-        {videos.filter(video => video.group === "shorts").map(clip => (
+    {grouped["shorts"].map(clip => (
         <div class="card">
             <div class="video-wrapper shorts">
                 {clip.type === "mp4" ? 
@@ -76,10 +61,10 @@ export const videos = [
 <section class="mb-12 not-prose">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b border-zinc-700 text-white">de WWW</h2>
     <div class="video-grid">
-        {videos.filter(video => video.group === "ext-clips").map(ext => (
+        {grouped["ext-clips"].map(ext => (
             <div class="card">
                 <div class="video-wrapper">
-                    <LiteYouTube videoId={ext.id} title={ext.title} params={ext.params ?? false} />
+                    <LiteYouTube videoId={ext.id} title={ext.title} params={ext.params} />
                 </div>
                 <div class="video-info">
                     <div class="video-title">{ext.title}</div>
