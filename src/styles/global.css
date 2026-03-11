@@ -22,17 +22,26 @@
 
 @layer components {
   /* --- Grid Layouts for clips.mdx --- */
-.video-grid {
-  @apply gap-6 mb-12;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-}
+  .video-grid {
+    @apply gap-6 mb-12;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
-.shorts-grid {
-  @apply gap-4 mb-12;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-}
+  @media (min-width: 640px) {
+    .video-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1280px) {
+    .video-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .shorts-grid {
+    @apply gap-4 mb-12;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
   /* --- Video Wrappers & Aspect Ratios --- */
   .video-wrapper {
     @apply relative w-full bg-black overflow-hidden;
@@ -52,6 +61,7 @@
   /* --- Card & Typography --- */
   .card {
     @apply bg-zinc-800 border border-zinc-700 rounded-xl overflow-hidden transition-all hover:border-zinc-500 hover:shadow-xl;
+    container-type: inline-size;
   }
 
   .video-info {
@@ -59,7 +69,18 @@
   }
 
   .video-title {
-    @apply text-sm font-semibold text-white line-clamp-2;
+    @apply font-semibold text-white line-clamp-2;
+    font-size: 0.8rem;
+  }
+
+  @container (min-width: 300px) {
+    .video-title { font-size: 0.9rem; }
+    .video-info  { padding: 1rem; }
+  }
+
+  @container (min-width: 440px) {
+    .video-title { font-size: 1rem; }
+    .video-info  { padding: 1.25rem; }
   }
 
   .info-box {
@@ -78,9 +99,8 @@
   .breadcrumb {
     @apply flex items-center gap-2 text-sm text-zinc-500 mb-6;
   }
-  
+
   .breadcrumb a {
     @apply text-blue-400 hover:underline;
   }
 }
-
