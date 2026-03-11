@@ -25,21 +25,12 @@
   .video-grid {
     @apply gap-6 mb-12;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   }
-
-  @media (min-width: 640px) {
-    .video-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (min-width: 1280px) {
-    .video-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
   .shorts-grid {
     @apply gap-4 mb-12;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
   /* --- Video Wrappers & Aspect Ratios --- */
