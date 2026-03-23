@@ -22,6 +22,7 @@ export const siteMap = {
     children: [
       { label: "HIIT for Oldies", slug: "hiit" },
       { label: "Are you having a Stroke?", slug: "tia" },
+      { label: "Heart watch for S. Asians", slug: "masala" },
     ],
   },
   imagery: {

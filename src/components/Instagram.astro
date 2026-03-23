@@ -1,0 +1,22 @@
+---
+// src/components/Instagram.astro
+const { id } = Astro.props;
+const shortId = id.replace(/\/$/, "").split("/").pop();
+---
+
+<div class="not-prose flex justify-center my-8">
+  {/* The Wrapper: Acts as a "window" */}
+  <div class="relative overflow-hidden rounded-xl border border-zinc-700 shadow-2xl max-w-full" 
+       style="width: 400px; height: 520px;">
+    
+    {/* The Iframe: Pushed up by 60px to hide the "View Profile" bar */}
+    <iframe
+      class="absolute left-0 w-full"
+      src={`https://www.instagram.com/p/${shortId}/embed/`}
+      style="top: -60px; height: 600px;" 
+      frameborder="0"
+      scrolling="no"
+      allowtransparency="true">
+    </iframe>
+  </div>
+</div>

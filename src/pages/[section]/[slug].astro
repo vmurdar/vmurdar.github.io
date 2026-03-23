@@ -5,6 +5,7 @@ import { SignedIn, SignedOut, UserButton } from '@clerk/astro/components';
 import { existsSync, statSync } from "node:fs";
 import { isProtectedContent } from "../../config/protected-content";
 import { sectionKeys, siteMap, type SectionKey, type SiteMapSection } from "../../config/site-map";
+import Instagram from "../../components/Instagram.astro";
 
 export async function getStaticPaths() {
   const paths = [];
@@ -70,7 +71,7 @@ const signInPath = `/sign-in?redirect_url=${encodeURIComponent(currentPath)}&aft
     {isProtected ? (
       <>
         <SignedIn>
-          <Content />
+          <Content components={{ Instagram }}/>
         </SignedIn>
 
         <SignedOut>
@@ -88,7 +89,7 @@ const signInPath = `/sign-in?redirect_url=${encodeURIComponent(currentPath)}&aft
         </SignedOut>
       </>
     ) : (
-      <Content />
+      <Content components={{ Instagram }}/>
     )}
   </div>
 
