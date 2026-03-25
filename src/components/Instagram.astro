@@ -1,22 +1,83 @@
 ---
 // src/components/Instagram.astro
-const { id } = Astro.props;
-const shortId = id.replace(/\/$/, "").split("/").pop();
+// Uses Instagram's official blockquote + embed.js approach.
+// Renders at Instagram's natural width (~400px) centered in the column.
+// No outer wrapper needed — the blockquote self-sizes correctly.
+
+const { id, caption } = Astro.props;
+
+const cleaned = id.replace(/\/$/, "");
+const shortcode = cleaned.startsWith("http")
+  ? cleaned.split("/").filter(Boolean).pop() ?? cleaned
+  : cleaned;
+
+const isReel = id.includes("/reel/");
+const permalink = isReel
+  ? `https://www.instagram.com/reel/${shortcode}/`
+  : `https://www.instagram.com/p/${shortcode}/`;
 ---
 
-<div class="not-prose flex justify-center my-8">
-  {/* The Wrapper: Acts as a "window" */}
-  <div class="relative overflow-hidden rounded-xl border border-zinc-700 shadow-2xl max-w-full" 
-       style="width: 400px; height: 520px;">
-    
-    {/* The Iframe: Pushed up by 60px to hide the "View Profile" bar */}
-    <iframe
-      class="absolute left-0 w-full"
-      src={`https://www.instagram.com/p/${shortId}/embed/`}
-      style="top: -60px; height: 600px;" 
-      frameborder="0"
-      scrolling="no"
-      allowtransparency="true">
-    </iframe>
-  </div>
+<!--
+  Instagram's blockquote embed placeholder.
+  embed.js replaces this with a correctly-sized iframe at ~400px wide.
+  We let it center itself naturally — no clipping wrapper, no fixed height.
+  On mobile it stretches to 100% of the viewport width automatically.
+-->
+<div class="ig-embed-wrap not-prose">
+  <blockquote
+    class="instagram-media"
+    data-instgrm-permalink={`${permalink}?utm_source=ig_embed&utm_campaign=loading`}
+    data-instgrm-version="14"
+    data-instgrm-captioned={caption !== false ? "" : undefined}
+    style="
+      background: #fff;
+      border: 0;
+      border-radius: 3px;
+      box-shadow: 0 0 1px 0 rgba(0,0,0,0.5), 0 1px 10px 0 rgba(0,0,0,0.15);
+      margin: 0 auto;
+      max-width: 540px;
+      min-width: 326px;
+      padding: 0;
+      width: 99.375%;
+      width: -webkit-calc(100% - 2px);
+      width: calc(100% - 2px);
+    "
+  >
+    <div style="padding: 16px;">
+      <a
+        href={permalink}
+        style="color: #0095f6; font-family: system-ui, sans-serif; font-size: 14px; text-decoration: none;"
+        target="_blank"
+        rel="noopener"
+      >
+<!--        View this post on Instagram -->
+      </a>
+    </div>
+  </blockquote>
 </div>
+
+<script is:inline async src="//www.instagram.com/embed.js"></script>
+
+<style>
+  /*
+   * Centers the embed in whatever column it sits in.
+   * On mobile (< 400px) it fills the full width edge-to-edge.
+   * The title slot below the embed is handled in the MDX .ig-title class.
+   */
+  .ig-embed-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Make the blockquote (and the iframe embed.js injects) full-width on mobile */
+  @media (max-width: 480px) {
+    .ig-embed-wrap .instagram-media,
+    .ig-embed-wrap iframe {
+      min-width: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      border-radius: 0 !important;
+    }
+  }
+</style>

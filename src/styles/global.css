@@ -33,6 +33,60 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
+  /*
+   * Instagram Reels grid — wraps multiple <Instagram> cards.
+   * Each card self-limits to 540px (Instagram's ceiling) so on wide screens
+   * you get 2–3 columns; on mobile a single column.
+   * Usage in MDX:
+   *   <div class="ig-grid">
+   *     <Instagram id="ABC123" />
+   *     <Instagram id="DEF456" />
+   *   </div>
+   */
+  /*
+   * Instagram Reels grid.
+   * Columns are sized to Instagram's natural embed width (~400px).
+   * At typical content widths this gives 2 columns on desktop,
+   * 1 column on tablet/mobile — matching the reference NRI Pulse layout.
+   * Each cell (.ig-reel-item) is a <figure> so the title sits naturally below.
+   */
+  .ig-reel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    /* Align items to the top so reels of different heights don't stretch */
+    align-items: start;
+  }
+
+  .ig-reel-item {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ig-reel-title {
+    margin-bottom: 2.0rem;
+    font-size: 2.0rem;
+    font-weight: 600;
+    color: var(--color-zinc-200, #e4e4e7);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* On mobile: single full-width column, no side padding */
+  @media (max-width: 480px) {
+    .ig-reel-grid {
+      gap: 1.5rem;
+    }
+
+    .ig-reel-item {
+      /* Let the embed go edge-to-edge on small screens */
+      width: 100%;
+    }
+  }
+
   /* --- Video Wrappers & Aspect Ratios --- */
   .video-wrapper {
     @apply relative w-full bg-black overflow-hidden;
