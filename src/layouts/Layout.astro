@@ -113,7 +113,31 @@ const { title, description = "Knowledge by the GW" } = Astro.props;
 				</div>
 			</div>
 		</header>
+		<script>
+		// Close dropdowns when clicking outside
+		document.addEventListener('click', (event) => {
+			const details = document.querySelectorAll('details');
+			details.forEach((detail) => {
+			// Check if the click was outside this specific details element
+			if (!detail.contains(event.target as Node)) {
+				detail.removeAttribute('open');
+			}
+			});
+		});
 
+		// Close other dropdowns when opening a new one
+		const summaries = document.querySelectorAll('summary');
+		summaries.forEach((summary) => {
+			summary.addEventListener('click', (event) => {
+			const parentDetails = summary.parentElement;
+			document.querySelectorAll('details').forEach((detail) => {
+				if (detail !== parentDetails) {
+				detail.removeAttribute('open');
+				}
+			});
+			});
+		});
+		</script>
 		<!-- Main Content -->
 		<main class="flex-1 p-4 md:p-8 pt-24 md:pt-28 w-full max-w-7xl mx-auto min-h-screen">
 			<slot />
