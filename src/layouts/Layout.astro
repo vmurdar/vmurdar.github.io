@@ -36,7 +36,7 @@ const { title, description = "Knowledge by the GW" } = Astro.props;
 					{navItems.map((item) => (
 						<div class="relative group">
 							{item.children ? (
-								<details class="relative group">
+								<details class="relative group js-dropdown">
 								<summary class="nav-link flex items-center gap-1 cursor-pointer list-none whitespace-nowrap">
 									<span>{item.label}</span>
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 shrink-0 transition-transform group-open:rotate-180">
@@ -55,8 +55,7 @@ const { title, description = "Knowledge by the GW" } = Astro.props;
 									))}
 									</div>
 								</div>
-								</details>
-							) : (
+								</details>							) : (
 								<a 
 									href={item.href || '/under-construction'} 
 									class="nav-link block"
@@ -80,7 +79,7 @@ const { title, description = "Knowledge by the GW" } = Astro.props;
 							{navItems.map((item) => (
 								<div class="px-2">
 									{item.children ? (
-										<details class="group py-1">
+										<details class="group py-1 js-dropdown">
 											<summary class="list-none px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white rounded-md transition-colors cursor-pointer flex items-center justify-between">
 												<span>{item.label}</span>
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-zinc-400 transition-transform group-open:rotate-180">
@@ -97,8 +96,7 @@ const { title, description = "Knowledge by the GW" } = Astro.props;
 													</a>
 												))}
 											</div>
-										</details>
-									) : (
+										</details>									) : (
 										<a 
 											href={item.href || '/under-construction'} 
 											class="block px-4 py-2 text-sm text-gray-300 hover:bg-zinc-700 hover:text-white rounded-md transition-colors"
@@ -113,31 +111,34 @@ const { title, description = "Knowledge by the GW" } = Astro.props;
 				</div>
 			</div>
 		</header>
+
 		<script>
-		// Close dropdowns when clicking outside
+		// This selects only the sub-menus you tagged above
+		const dropdowns = document.querySelectorAll('details.js-dropdown');
+		
+		// This selects the main mobile hamburger container
+		const mobileMenuToggle = document.querySelector('.md\\:hidden > details');
+
 		document.addEventListener('click', (event) => {
-			const details = document.querySelectorAll('details');
-			details.forEach((detail) => {
-			// Check if the click was outside this specific details element
-			if (!detail.contains(event.target as Node)) {
-				detail.removeAttribute('open');
+			const target = event.target as Node;
+
+			// 1. Close sub-menus if you click anywhere else
+			dropdowns.forEach((details) => {
+			if (!details.contains(target)) {
+				details.removeAttribute('open');
 			}
 			});
-		});
 
-		// Close other dropdowns when opening a new one
-		const summaries = document.querySelectorAll('summary');
-		summaries.forEach((summary) => {
-			summary.addEventListener('click', (event) => {
-			const parentDetails = summary.parentElement;
-			document.querySelectorAll('details').forEach((detail) => {
-				if (detail !== parentDetails) {
-				detail.removeAttribute('open');
-				}
-			});
-			});
+			// 2. Close the entire mobile menu ONLY if you click a final link
+			const isLink = target instanceof HTMLAnchorElement;
+			const isSummary = !!(target as HTMLElement).closest('summary');
+			
+			if (isLink && !isSummary && mobileMenuToggle) {
+			mobileMenuToggle.removeAttribute('open');
+			}
 		});
 		</script>
+
 		<!-- Main Content -->
 		<main class="flex-1 p-4 md:p-8 pt-24 md:pt-28 w-full max-w-7xl mx-auto min-h-screen">
 			<slot />
