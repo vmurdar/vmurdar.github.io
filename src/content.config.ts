@@ -1,30 +1,19 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Your excellent DRY approach
 const baseSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   draft: z.boolean().optional().default(false),
-  pubDate: z.coerce.date().optional(), 
+  pubDate: z.coerce.date().optional(),
+  navOrder: z.number().optional().default(99),
+  isProtected: z.boolean().optional().default(false),
 });
 
-// Modern Astro 5 Loaders
 export const collections = {
-  health: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/health" }),
-    schema: baseSchema,
-  }),
-  imagery: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/imagery" }),
-    schema: baseSchema,
-  }),
-  meTube: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/meTube" }),
-    schema: baseSchema,
-  }),
-  tech: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/tech" }),
+  // ONE single collection that dynamically reads all sub-folders
+  pages: defineCollection({
+    loader: glob({ pattern: '**/*.{md,mdx}', base: "./src/content/pages" }),
     schema: baseSchema,
   }),
 };

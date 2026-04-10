@@ -1,67 +1,54 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getEntry, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
 import { SignedIn, SignedOut, UserButton } from '@clerk/astro/components';
 import { existsSync, statSync } from "node:fs";
-import { isProtectedContent } from "../../config/protected-content";
-import { sectionKeys, siteMap, type SectionKey, type SiteMapSection } from "../../config/site-map";
-import Instagram from "../../components/Instagram.astro";
+import Instagram from "../components/Instagram.astro";
 
 export async function getStaticPaths() {
-  const paths = [];
-  for (const section of sectionKeys) {
-    const menu = siteMap[section] as SiteMapSection;
-    if (menu.slug) paths.push({ params: { section, slug: menu.slug } });
-    if (menu.children) {
-      for (const child of menu.children) {
-        if (child.slug) paths.push({ params: { section, slug: child.slug } });
-      }
-    }
-  }
-  return paths;
+  const pages = await getCollection("pages");
+  
+  return pages.map(page => ({
+    params: { slug: page.id }, // page.id will look like "health/hiit" or "meTube/clips"
+    props: { page },
+  }));
 }
 
-const { section, slug } = Astro.params;
+const { page } = Astro.props;
+const { Content } = await render(page);
 
-function isSection(value: string): value is SectionKey {
-  return sectionKeys.includes(value as SectionKey);
-}
+// 1. Extract protection status from frontmatter
+const isProtected = page.data.isProtected;
 
-if (!section || !slug || !isSection(section)) {
-  return new Response(null, { status: 404 });
-}
+// 2. Extract the section name for the breadcrumb (e.g., "health" from "health/hiit")
+const sectionName = page.id.split('/')[0];
 
-const entry = await getEntry(section, slug);
-if (!entry || entry.data.draft) {
-  return new Response(null, { status: 404 });
-}
-
-const isProtected = isProtectedContent(section, slug);
-const { Content } = await render(entry);
-
-const contentFileCandidates = [
-  `src/content/${section}/${slug}.mdx`,
-  `src/content/${section}/${slug}.md`,
+// 3. File System logic for the "last saved" footer
+// Astro 5 glob loader usually provides the exact physical path in page.filePath
+const contentFileCandidates = page.filePath ? [page.filePath] : [
+  `src/content/pages/${page.id}.mdx`,
+  `src/content/pages/${page.id}.md`,
 ];
+
 const contentFilePath = contentFileCandidates.find((candidate) => existsSync(candidate));
 const lastSavedDate = contentFilePath ? statSync(contentFilePath).mtime : null;
 const lastSavedText = lastSavedDate
   ? new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(lastSavedDate)
   : null;
 
+// 4. Clerk redirect logic
 const currentPath = Astro.url.pathname;
 const signInPath = `/sign-in?redirect_url=${encodeURIComponent(currentPath)}&after_sign_in_url=${encodeURIComponent(currentPath)}&after_sign_up_url=${encodeURIComponent(currentPath)}&sign_in_force_redirect_url=${encodeURIComponent(currentPath)}&sign_up_force_redirect_url=${encodeURIComponent(currentPath)}`;
 ---
 
-<Layout title={entry.data.title}>
+<Layout title={page.data.title}>
   <header class="mb-8 flex justify-between items-start">
     <div>
       <nav class="breadcrumb">
-        <a href={import.meta.env.BASE_URL}>Home</a> / <span class="capitalize">{section}</span> / {entry.data.title}
+        <a href={import.meta.env.BASE_URL}>Home</a> / <span class="capitalize">{sectionName}</span> / {page.data.title}
       </nav>
-      <h1 class="text-3xl font-bold text-white">{entry.data.title}</h1>
+      <h1 class="text-3xl font-bold text-white">{page.data.title}</h1>
     </div>
-    <!-- Added a User Button so you can see your login status clearly -->
     <SignedIn>
       <UserButton afterSignOutUrl={import.meta.env.BASE_URL} />
     </SignedIn>
@@ -78,7 +65,7 @@ const signInPath = `/sign-in?redirect_url=${encodeURIComponent(currentPath)}&aft
           <div class="bg-zinc-800 p-12 rounded-2xl border border-zinc-700 text-center shadow-2xl">
             <div class="text-5xl mb-4">🔒</div>
             <h2 class="text-white mt-0">Protected Content</h2>
-            <p class="text-zinc-400 mb-8">This section (meTube) requires an account to view.</p>
+            <p class="text-zinc-400 mb-8">This section requires an account to view.</p>
             <a 
               href={signInPath}
               class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105"

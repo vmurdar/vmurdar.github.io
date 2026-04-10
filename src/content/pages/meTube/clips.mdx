@@ -1,8 +1,10 @@
 ---
 title: Videos
 description: A collection of clips 'n shorts.
+navOrder: 1
+isProtected: true
 ---
-import LiteYouTube from '../../components/LiteYouTube.astro';
+import LiteYouTube from '../../../components/LiteYouTube.astro';
 import { videos } from './clips-data.ts';
 
 export const grouped = videos.reduce((acc, v) => {
