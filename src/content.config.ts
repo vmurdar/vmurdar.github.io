@@ -13,7 +13,8 @@ const baseSchema = z.object({
 export const collections = {
   // ONE single collection that dynamically reads all sub-folders
   pages: defineCollection({
-    loader: glob({ pattern: '**/*.{md,mdx}', base: "./src/content/pages" }),
+    loader: glob({ pattern: '**/*.{md,mdx}', base: "./src/content",
+   }),
     schema: baseSchema,
   }),
 };
