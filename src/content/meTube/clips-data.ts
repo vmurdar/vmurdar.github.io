@@ -11,5 +11,8 @@ export const videos = [
   { group: "ext-clips", id: "u7K72X4eo_s", title: "Teardrop" },
   { group: "shorts", id: "rTsMyrHxiig", title: "Okonomiyaki" },
   { group: "shorts", id: "N7fQTyc85sY", title: "Ernakulathappan Ambalam Shiveli" },
+  { group: "ext-clips", id: "1eTSL2kopP4", title: "Language is a Virus" },
+  { group: "ext-clips", id: "1kLDoIsBk0M", title: "Boots on the Ground" },
+  { group: "ext-clips", id: "_yHqAZjJCo0", title: "Cooking Together" },
 {/* { type: "mp4", src: "/videos/ekm_temple_0129.mp4", title: "Temple Fest 2026 This might get loud" }, */}
 ];
