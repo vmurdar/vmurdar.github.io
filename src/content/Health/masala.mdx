@@ -1,42 +1,34 @@
 ---
-title: Helpful guide for aging South Asians
+title: Guide for aging South Asians
+description: Collection of interesting insta reels.
 navOrder: 3
 ---
+
+import { videos } from './_masala/masala-data.ts';
+
+export const grouped = videos.reduce((acc, v) => {
+  (acc[v.group] ??= []).push(v);
+  return acc;
+}, {});
 
 ### Featured Reels
 
 <div class="ig-reel-grid not-prose">
+  {grouped["sasian-health"].map(clip => (
+    <figure key={clip.id} class="ig-reel-item not-prose">
+      <p class="ig-reel-title">{clip.title}</p>
+      <Instagram id={clip.id} caption={false} />
+    </figure>
+  ))}
+</div>
 
-  <figure class="ig-reel-item not-prose">
-    <p class="ig-reel-title">South Asian Heart Paradox</p>
-    <Instagram id="DVR5zRKiZW7" caption={false} />
-  </figure>
+### Fitness
 
-  <figure class="ig-reel-item not-prose">
-    <figcaption class="ig-reel-title">Protein hierarchy</figcaption>
-    <Instagram id="DWHnD1CERSY" caption={false} />
-  </figure>
-
-  <figure class="ig-reel-item not-prose">
-    <figcaption class="ig-reel-title">Watch for ...</figcaption>
-    <Instagram id="DVax7XQDIiR" caption={false} />
-  </figure>
-
-  <figure class="ig-reel-item not-prose">
-    <figcaption class="ig-reel-title">Resistance bands over free weights</figcaption>
-    <Instagram id="DWRg_Z6jcqc" caption={false} />
-  </figure>
-
-  <figure class="ig-reel-item not-prose">
-    <figcaption class="ig-reel-title">Recent Origins of Diabetes/Heart Disease Proclivity?</figcaption>
-    <Instagram id="DXULosUlT9a" caption={false} />
-  </figure>
-
-  <figure class="ig-reel-item not-prose">
-    <figcaption class="ig-reel-title">Proclivity Traced back to Holocene?</figcaption>
-    <Instagram id="DXARv_gmcal" caption={false} />
-  </figure>
-
-  {/* Add more reels here — each in its own <figure class="ig-reel-item"> */}
-
+<div class="ig-reel-grid not-prose">
+  {grouped["fitness"].map(clip => (
+    <figure key={clip.id} class="ig-reel-item not-prose">
+      <p class="ig-reel-title">{clip.title}</p>
+      <Instagram id={clip.id} caption={false} />
+    </figure>
+  ))}
 </div>

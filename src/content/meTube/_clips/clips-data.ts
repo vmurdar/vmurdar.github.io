@@ -13,6 +13,7 @@ export const videos = [
   { group: "shorts", id: "N7fQTyc85sY", title: "Ernakulathappan Ambalam Shiveli" },
   { group: "ext-clips", id: "1eTSL2kopP4", title: "Language is a Virus" },
   { group: "ext-clips", id: "1kLDoIsBk0M", title: "Boots on the Ground" },
+  { group: "ext-clips", id: "3PPGoKae3vg", title: "Going Shopping" },
   { group: "ext-clips", id: "_yHqAZjJCo0", title: "Cooking Together" },
 {/* { type: "mp4", src: "/videos/ekm_temple_0129.mp4", title: "Temple Fest 2026 This might get loud" }, */}
 ];

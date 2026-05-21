@@ -5,7 +5,7 @@ navOrder: 1
 isProtected: true
 ---
 import LiteYouTube from '../../components/LiteYouTube.astro';
-import { videos } from './clips-data.ts';
+import { videos } from './_clips/clips-data.ts';
 
 export const grouped = videos.reduce((acc, v) => {
   (acc[v.group] ??= []).push(v);
